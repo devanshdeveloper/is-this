@@ -1,4 +1,3 @@
-"use strict";
 class IsThis {
     // ------------------ Primitive Type Checks ------------------
     isString(value) {
@@ -174,5 +173,5 @@ class IsThis {
     }
 }
 const isThis = new IsThis();
-module.exports = isThis;
+export default isThis;
 //# sourceMappingURL=index.js.map

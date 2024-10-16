@@ -243,4 +243,4 @@ class IsThis {
   }
 }
 const isThis = new IsThis();
-module.exports = isThis;
+export default isThis;
