@@ -47,4 +47,5 @@ declare class IsThis {
     isUserDefinedType(value: any, constructor: Function): boolean;
     isFunctionType(value: any, constructor: Function): boolean;
 }
-export default IsThis;
+declare const _default: IsThis;
+export default _default;

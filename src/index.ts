@@ -243,4 +243,4 @@ class IsThis {
   }
 }
 
-export default IsThis;
+export default new IsThis();
