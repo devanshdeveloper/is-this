@@ -242,5 +242,5 @@ class IsThis {
     return typeof value === "function" && value.constructor === constructor;
   }
 }
-const isThis =  new IsThis()
-export default isThis;
+const isThis = new IsThis();
+module.exports = isThis;

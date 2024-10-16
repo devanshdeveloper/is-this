@@ -48,4 +48,3 @@ declare class IsThis {
     isFunctionType(value: any, constructor: Function): boolean;
 }
 declare const isThis: IsThis;
-export default isThis;

@@ -1,11 +1,11 @@
 {
   "name": "@devanshdeveloper/is-this",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "A lightweight JavaScript utility for type checking.",
   "main": "dist/esm/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
-  "type":  "module",
+  "type": "module",
   "scripts": {
     "build:cjs": "tsc --outDir dist/cjs --module commonjs",
     "build:esm": "tsc --outDir dist/esm --module esnext",
@@ -19,12 +19,11 @@
     "type": "git",
     "url": "https://github.com/devanshdeveloper/is-this.git"
   },
-  "keywords": [
-
-  ],
+  "keywords": [],
   "author": "Devansh Khetwani",
   "license": "MIT",
   "devDependencies": {
+    "@types/node": "^22.7.5",
     "typescript": "^5.0.0"
   }
 }
