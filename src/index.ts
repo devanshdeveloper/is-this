@@ -1,4 +1,6 @@
 class IsThis {
+  // ------------------ Primitive Type Checks ------------------
+
   isString(value: any): value is string {
     return typeof value === "string";
   }
@@ -10,6 +12,28 @@ class IsThis {
   isBoolean(value: any): value is boolean {
     return typeof value === "boolean";
   }
+
+  isNull(value: any): value is null {
+    return value === null;
+  }
+
+  isUndefined(value: any): value is undefined {
+    return typeof value === "undefined";
+  }
+
+  isNullOrUndefined(value: any): boolean {
+    return this.isNull(value) || this.isUndefined(value);
+  }
+
+  isBigInt(value: any): value is bigint {
+    return typeof value === "bigint";
+  }
+
+  isSymbol(value: any): value is symbol {
+    return typeof value === "symbol";
+  }
+
+  // ------------------ Collection Type Checks ------------------
 
   isArray(value: any): value is any[] {
     return Array.isArray(value);
@@ -23,31 +47,16 @@ class IsThis {
     return typeof value === "function";
   }
 
-  isNull(value: any): value is null {
-    return value === null;
+  isHTMLElement(value: any): boolean {
+    return value instanceof HTMLElement;
   }
 
-  isUndefined(value: any): value is undefined {
-    return typeof value === "undefined";
+  isMap(value: any): boolean {
+    return value instanceof Map;
   }
 
-  isBigInt(value: any): value is bigint {
-    return typeof value === "bigint";
-  }
-
-  isDate(value: any): value is Date {
-    return value instanceof Date;
-  }
-
-  isPromise(value: any): boolean {
-    return (
-      this.isObject(value) &&
-      typeof (value as { then?: Function }).then === "function"
-    );
-  }
-
-  isError(value: any): value is Error {
-    return value instanceof Error;
+  isSet(value: any): boolean {
+    return value instanceof Set;
   }
 
   isWeakMap(value: any): value is WeakMap<any, any> {
@@ -58,24 +67,13 @@ class IsThis {
     return value instanceof WeakSet;
   }
 
-  isInt(value: any): boolean {
-    return this.isNumber(value) && Number.isInteger(value);
-  }
+  // ------------------ Data Structure Checks ------------------
 
-  isFloat(value: any): boolean {
-    return this.isNumber(value) && !Number.isInteger(value);
-  }
-
-  isFiniteNumber(value: any): boolean {
-    return this.isNumber(value) && Number.isFinite(value);
-  }
-
-  isNaNValue(value: any): boolean {
-    return Number.isNaN(value);
-  }
-
-  isHTMLElement(value: any): boolean {
-    return value instanceof HTMLElement;
+  isPromise(value: any): boolean {
+    return (
+      this.isObject(value) &&
+      typeof (value as { then?: Function }).then === "function"
+    );
   }
 
   isArrayBuffer(value: any): value is ArrayBuffer {
@@ -98,79 +96,40 @@ class IsThis {
     );
   }
 
-  isFile(value: any): value is File {
-    return value instanceof File;
-  }
-
   isBlob(value: any): value is Blob {
     return value instanceof Blob;
+  }
+
+  isFile(value: any): value is File {
+    return value instanceof File;
   }
 
   isDataView(value: any): value is DataView {
     return value instanceof DataView;
   }
 
+  // ------------------ Number Checks ------------------
+
+  isInt(value: any): boolean {
+    return this.isNumber(value) && Number.isInteger(value);
+  }
+
+  isFloat(value: any): boolean {
+    return this.isNumber(value) && !Number.isInteger(value);
+  }
+
+  isFiniteNumber(value: any): boolean {
+    return this.isNumber(value) && Number.isFinite(value);
+  }
+
   isInfinity(value: any): boolean {
     return this.isNumber(value) && (value === Infinity || value === -Infinity);
   }
 
-  isElement(value: any): boolean {
-    return value instanceof Element;
-  }
+  // ------------------ String Checks ------------------
 
-  isNode(value: any): boolean {
-    return value instanceof Node;
-  }
-
-  isJSON(value: string): boolean {
-    try {
-      JSON.parse(value);
-      return true;
-    } catch (e) {
-      return false;
-    }
-  }
-
-  isValidEmail(value: any): boolean {
-    return this.isString(value) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
-  }
-  isPrimitive(value: any): boolean {
-    return (
-      value === null ||
-      ["string", "number", "boolean", "symbol", "undefined", "bigint"].includes(
-        typeof value
-      )
-    );
-  }
-
-  isHTMLElementType(value: any, type: keyof HTMLElementTagNameMap): boolean {
-    return (
-      value instanceof Element &&
-      value.tagName.toLowerCase() === type.toLowerCase()
-    );
-  }
-  isUserDefinedType(value: any, constructor: Function): boolean {
-    return value instanceof constructor;
-  }
-
-  isFunctionType(value: any, constructor: Function): boolean {
-    return typeof value === "function" && value.constructor === constructor;
-  }
-
-  isAsyncFunction(value: any): boolean {
-    return (
-      value instanceof Function && value.constructor.name === "AsyncFunction"
-    );
-  }
-
-  isPromiseLike(value: any): boolean {
-    return (
-      value && typeof value === "object" && typeof value.then === "function"
-    );
-  }
-
-  isEmptyArray(value: any): boolean {
-    return this.isArray(value) && value.length === 0;
+  isEmptyString(value: any): boolean {
+    return this.isString(value) && value.trim().length === 0;
   }
 
   isNumberString(value: any): boolean {
@@ -179,14 +138,6 @@ class IsThis {
 
   isBooleanString(value: any): boolean {
     return this.isString(value) && (value === "true" || value === "false");
-  }
-
-  isNullOrUndefined(value: any): boolean {
-    return this.isNull(value) || this.isUndefined(value);
-  }
-
-  isFiniteNumberString(value: any): boolean {
-    return this.isString(value) && isFinite(Number(value));
   }
 
   isDateString(value: any): boolean {
@@ -213,32 +164,49 @@ class IsThis {
     return this.isString(value) && /^\+?[1-9]\d{1,14}$/.test(value);
   }
 
-  isPositiveInteger(value: any): boolean {
-    return this.isNumber(value) && Number.isInteger(value) && value > 0;
+  isValidEmail(value: any): boolean {
+    return this.isString(value) && /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
   }
 
-  isNegativeInteger(value: any): boolean {
-    return this.isNumber(value) && Number.isInteger(value) && value < 0;
-  }
+  // ------------------ Object Checks ------------------
 
-  isEmptyString(value: any): boolean {
-    return this.isString(value) && value.trim().length === 0;
+  isEmptyObject(value: any): boolean {
+    return this.isObject(value) && Object.keys(value).length === 0;
   }
 
   isObjectWithKeys(value: any, keys: string[]): boolean {
     return this.isObject(value) && keys.every((key) => key in value);
   }
 
+  // ------------------ Array Checks ------------------
+
+  isEmptyArray(value: any): boolean {
+    return this.isArray(value) && value.length === 0;
+  }
+
+  isNonEmptyArray(value: any): boolean {
+    return this.isArray(value) && value.length > 0;
+  }
+
+  isArrayLike(value: any): boolean {
+    return (
+      value != null &&
+      typeof value === "object" &&
+      "length" in value &&
+      Number.isInteger(value.length)
+    );
+  }
+
+  // ------------------ Comparison Checks ------------------
+
   isDeepEqual(a: any, b: any): boolean {
     return JSON.stringify(a) === JSON.stringify(b);
   }
 
+  // ------------------ Miscellaneous Checks ------------------
+
   isRegExp(value: any): boolean {
     return value instanceof RegExp;
-  }
-
-  isEmptyObject(value: any): boolean {
-    return this.isObject(value) && Object.keys(value).length === 0;
   }
 
   isURL(value: any): boolean {
@@ -254,29 +222,24 @@ class IsThis {
     return value != null && typeof value[Symbol.iterator] === "function";
   }
 
-  isMap(value: any): boolean {
-    return value instanceof Map;
-  }
-
-  isSet(value: any): boolean {
-    return value instanceof Set;
-  }
-
-  isSymbol(value: any): boolean {
-    return typeof value === "symbol";
-  }
-
-  isArrayLike(value: any): boolean {
+  isAsyncFunction(value: any): boolean {
     return (
-      value != null &&
-      typeof value === "object" &&
-      "length" in value &&
-      Number.isInteger(value.length)
+      value instanceof Function && value.constructor.name === "AsyncFunction"
     );
   }
 
-  isNonEmptyArray(value: any): boolean {
-    return this.isArray(value) && value.length > 0;
+  isPromiseLike(value: any): boolean {
+    return (
+      value && typeof value === "object" && typeof value.then === "function"
+    );
+  }
+
+  isUserDefinedType(value: any, constructor: Function): boolean {
+    return value instanceof constructor;
+  }
+
+  isFunctionType(value: any, constructor: Function): boolean {
+    return typeof value === "function" && value.constructor === constructor;
   }
 }
 
