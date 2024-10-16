@@ -1,5 +1,5 @@
 {
-  "name": "is-this",
+  "name": "@devanshdeveloper/is-this",
   "version": "1.0.0",
   "description": "A lightweight JavaScript utility for type checking.",
   "main": "dist/esm/index.js",
