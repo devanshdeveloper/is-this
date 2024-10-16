@@ -172,5 +172,6 @@ class IsThis {
         return typeof value === "function" && value.constructor === constructor;
     }
 }
-export default { isThis: new IsThis() };
+const isThis = new IsThis();
+export default isThis;
 //# sourceMappingURL=index.js.map
