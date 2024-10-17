@@ -38,6 +38,9 @@ declare class IsThis {
     isEmptyString(value: any): boolean;
     isNumberString(value: any): boolean;
     isBooleanString(value: any): boolean;
+    isNullString(value: any): boolean;
+    isUndefinedString(value: any): boolean;
+    isNullOrUndefinedString(value: any): boolean;
     isDateString(value: any): boolean;
     isUUID(value: any): boolean;
     isHexColor(value: any): boolean;

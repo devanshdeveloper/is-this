@@ -142,6 +142,15 @@ class IsThis {
     isBooleanString(value) {
         return this.isString(value) && (value === "true" || value === "false");
     }
+    isNullString(value) {
+        return this.isString(value) && value === "null";
+    }
+    isUndefinedString(value) {
+        return this.isString(value) && value === "undefined";
+    }
+    isNullOrUndefinedString(value) {
+        return this.isString(value) && (value === "null" || value === "undefined");
+    }
     isDateString(value) {
         const date = new Date(value);
         return !isNaN(date.getTime());
@@ -373,7 +382,7 @@ class IsThis {
         return this.isString(value) && /^[a-z]+\/[a-z0-9\-\+]+$/i.test(value);
     }
     isMobileDevice() {
-        return (this.isBrowser() && /Mobi|Android/i.test(navigator.userAgent));
+        return this.isBrowser() && /Mobi|Android/i.test(navigator.userAgent);
     }
     isDevEnvironment() {
         return process.env.NODE_ENV === "development";
