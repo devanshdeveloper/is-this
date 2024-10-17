@@ -18,7 +18,7 @@ isThis is a robust utility library for performing type and value checks in JavaS
 You can easily add isThis to your project using npm:
 
 ```bash
-npm install is-this
+npm i @devanshdeveloper/is-this
 ```
 
 ## Usage
