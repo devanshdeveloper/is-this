@@ -191,6 +191,18 @@ class IsThis {
     return this.isString(value) && (value === "true" || value === "false");
   }
 
+  isNullString(value: any): boolean {
+    return this.isString(value) && value === "null";
+  }
+
+  isUndefinedString(value: any): boolean {
+    return this.isString(value) && value === "undefined";
+  }
+
+  isNullOrUndefinedString(value: any): boolean {
+    return this.isString(value) && (value === "null" || value === "undefined");
+  }
+
   isDateString(value: any): boolean {
     const date = new Date(value);
     return !isNaN(date.getTime());
@@ -429,7 +441,6 @@ class IsThis {
     return keys1.every((key) => key in obj2 && obj1[key] === obj2[key]);
   }
 
-
   isApproxEqual(
     value: number,
     comparison: number,
@@ -531,9 +542,7 @@ class IsThis {
   }
 
   isMobileDevice(): boolean {
-    return (
-      this.isBrowser() && /Mobi|Android/i.test(navigator.userAgent)
-    );
+    return this.isBrowser() && /Mobi|Android/i.test(navigator.userAgent);
   }
 
   isDevEnvironment(): boolean {
