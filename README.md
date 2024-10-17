@@ -1,89 +1,129 @@
-# IsThis
-IsThis is a TypeScript utility class that provides a collection of type-checking methods to help determine the type of a variable or object. With simple and efficient checks for primitive types, complex structures, and custom types, IsThis makes it easier to write robust and maintainable TypeScript code.
+# isThis - Comprehensive Type and Value Checking Utility
+
+isThis is a robust utility library for performing type and value checks in JavaScript and TypeScript. It provides an extensive range of methods to validate primitive types, collections, strings, numbers, dates, and more. Whether you're checking if a value is a string, verifying if a number is prime, or validating if an object has specific keys, isThis offers easy-to-use methods to cover all these scenarios and more.
 
 ## Features
- - Type Guards: Use type guards to narrow down types in TypeScript, improving type safety.
- - Comprehensive Checks: Includes checks for various data types including strings, numbers, arrays, objects, functions, and more.
- - Custom Type Checking: Allows for checking against user-defined types and constructors.
- - Data Structure Checks: Efficient checks for data structures like Maps, Sets, WeakMaps, WeakSets, and more.
- - String Validation: Validates strings against common formats, such as email, UUID, hex colors, and phone numbers.
- - Utilities for Arrays and Objects: Functions for checking empty arrays and objects, as well as deep equality checks.
 
+ - Primitive Type Checks: Verify basic types like strings, numbers, booleans, null, undefined, and more.
+ - Collection Type Checks: Detect arrays, objects, maps, sets, weakmaps, weaksets, and typed arrays.
+ - Number Validation: Perform specific checks on numbers such as integers, floats, even, odd, prime, Fibonacci, divisibility, etc.
+ - String Validation: Check if strings are empty, valid UUIDs, hex colors, valid email addresses, phone numbers, IPv4/IPv6 addresses, and more.
+ - Object Validation: Validate objects for keys, methods, and prototype inheritance, as well as check if objects are frozen, sealed, or extensible.
+ - Array Validation: Perform checks for empty or non-empty arrays, arrays of a specific type, arrays with unique elements, and subsets.
+ - Date Validation: Check if dates are valid, in the past, future, or today/tomorrow, and if a year is a leap year.
+ - Miscellaneous: Includes checks for URLs, MIME types, mobile devices, environments (development/production), iterables, errors, and more.
 
 ## Installation
-To install the package, you can use npm:
 
+You can easily add isThis to your project using npm:
+
+```bash
 npm install is-this
-
-## Usage
-Import the IsThis class and create an instance to start using the type-checking methods:
-
-```typescript
-import IsThis from 'is-this';
-
-const isThis = new IsThis();
-
-console.log(isThis.isString("Hello")); // true
-console.log(isThis.isNumber(42)); // true
-console.log(isThis.isArray([])); // true
-console.log(isThis.isObject({})); // true
-console.log(isThis.isValidEmail("example@example.com")); // true
-console.log(isThis.isUUID("123e4567-e89b-12d3-a456-426614174000")); // true
 ```
 
-## Available Methods
-Here’s a quick overview of the available methods in the IsThis class:
+## Usage
 
-### Type Checks
+First, import the isThis library in your JavaScript or TypeScript file:
 
- - isString(value: any): value is string
- - isNumber(value: any): value is number
- - isBoolean(value: any): value is boolean
- - isArray(value: any): value is any[]
- - isObject(value: any): value is object
- - isFunction(value: any): value is Function
- - isNull(value: any): value is null
- - isUndefined(value: any): value is undefined
- - isBigInt(value: any): value is bigint
- - isDate(value: any): value is Date
- - isPromise(value: any): boolean
- - isError(value: any): value is Error
- - isWeakMap(value: any): value is WeakMap<any, any>
- - isWeakSet(value: any): value is WeakSet<any>
- - isSymbol(value: any): boolean
+```typescript
+import isThis from 'is-this';
+```
 
-### Array and Object Checks
+Now you can use any of the methods provided by isThis to perform type or value checks. Here are some examples:
 
- - isEmptyArray(value: any): boolean
- - isNonEmptyArray(value: any): boolean
- - isEmptyObject(value: any): boolean
- - isObjectWithKeys(value: any, keys: string[]): boolean
+### Primitive Type Checks
 
+```typescript
+isThis.isString('Hello, World!'); // true
+isThis.isNumber(42); // true
+isThis.isBoolean(false); // true
+isThis.isNull(null); // true
+isThis.isUndefined(undefined); // true
+isThis.isBigInt(123n); // true
+isThis.isSymbol(Symbol()); // true
+```
+
+### Collection Type Checks
+
+```typescript
+isThis.isArray([1, 2, 3]); // true
+isThis.isObject({ key: 'value' }); // true
+isThis.isFunction(() => {}); // true
+isThis.isMap(new Map()); // true
+isThis.isSet(new Set()); // true
+```
+
+### Number Validation
+
+```typescript
+isThis.isInt(123); // true
+isThis.isPrime(7); // true
+isThis.isEven(8); // true
+isThis.isFibonacci(8); // true
+isThis.isDivisibleBy(10, 2); // true
+isThis.isSafeInteger(Number.MAX_SAFE_INTEGER); // true
+```
 
 ### String Validation
 
- - isValidEmail(value: any): boolean
- - isUUID(value: any): boolean
- - isHexColor(value: any): boolean
- - isPhoneNumber(value: any): boolean
+```typescript
+isThis.isEmptyString(''); // true
+isThis.isUUID('550e8400-e29b-41d4-a716-446655440000'); // true
+isThis.isValidEmail('test@example.com'); // true
+isThis.isHexColor('#ff5733'); // true
+isThis.isPhoneNumber('+1234567890'); // true
+```
 
-### Number Checks
+### Object Validation
 
- - isInt(value: any): boolean
- - isFloat(value: any): boolean
- - isPositiveInteger(value: any): boolean
- - isNegativeInteger(value: any): boolean
- - isInfinity(value: any): boolean
+```typescript
+isThis.isEmptyObject({}); // true
+isThis.isObjectWithKeys({ name: 'John' }, ['name']); // true
+isThis.isPlainObject({ key: 'value' }); // true
+isThis.isFrozen(Object.freeze({})); // true
+```
 
+### Array Validation
 
-### Miscellaneous
+```typescript
+isThis.isEmptyArray([]); // true
+isThis.isArrayOfStrings(['apple', 'banana']); // true
+isThis.isArrayOfUniqueElements([1, 2, 3]); // true
+isThis.isSubset([1, 2], [1, 2, 3, 4]); // true
+```
 
- - isDateString(value: any): boolean
- - isDeepEqual(a: any, b: any): boolean
- - isURL(value: any): boolean
- - isIterable(value: any): boolean
-## Contributing
-Contributions are welcome! If you would like to contribute to this project, please open an issue or submit a pull request.
+### Date Validation
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+```typescript
+isThis.isDate(new Date()); // true
+isThis.isPastDate(new Date('2020-01-01')); // true
+isThis.isLeapYear(2024); // true
+isThis.isToday(new Date()); // true
+```
+
+### Miscellaneous Checks
+
+```typescript
+isThis.isURL('https://example.com'); // true
+isThis.isMobileDevice(); // Detects if running on a mobile device
+isThis.isBrowser(); // Detects if running in a browser environment
+isThis.isRegExp(/abc/); // true
+```
+
+## API Methods
+
+The library contains over 150+ methods across various categories to cover most validation needs:
+
+ - Primitive Type Checks: isString, isNumber, isBoolean, isNull, isUndefined, isBigInt, isSymbol, etc.
+ - Collection Type Checks: isArray, isObject, isFunction, isMap, isSet, isWeakMap, etc.
+ - Number Checks: isInt, isFloat, isPrime, isEven, isOdd, isSafeInteger, isPerfectSquare, isFibonacci, etc.
+ - String Checks: isEmptyString, isUUID, isValidEmail, isPhoneNumber, isIPv4, isIPv6, isMACAddress, isPalindrome, etc.
+ - Object Checks: isEmptyObject, isPlainObject, hasProperty, isFrozen, isSealed, etc.
+ - Array Checks: isEmptyArray, isArrayOfType, isSubset, isArrayOfUniqueElements, etc.
+ - Date Checks: isDate, isPastDate, isFutureDate, isToday, isLeapYear, etc.
+ - Miscellaneous Checks: isURL, isMobileDevice, isRegExp, isBrowser, etc.
+
+For a full list of methods and detailed examples, please refer to the source code in @devanshdeveloper/isThis/src/index.ts.
+
+## Contributions
+Contributions, issues, and feature requests are welcome! Feel free to submit a pull request or create an issue.
